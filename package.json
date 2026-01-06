@@ -1,0 +1,21 @@
+{
+  "name": "vite-maplibre-ts",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4"
+  },
+  "dependencies": {
+    "@geoman-io/maplibre-geoman-free": "^0.6.1",
+    "maplibre-gl": "^5.15.0",
+    "maplibre-gl-geo-editor": "^0.2.0",
+    "maplibre-gl-layer-control": "^0.2.0"
+  }
+}
