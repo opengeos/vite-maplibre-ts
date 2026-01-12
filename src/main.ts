@@ -10,9 +10,10 @@ import { Geoman } from '@geoman-io/maplibre-geoman-free';
 import { GeoEditor } from 'maplibre-gl-geo-editor';
 import { LayerControl } from 'maplibre-gl-layer-control';
 
+const BASE_MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 const map = new maplibregl.Map({
   container: 'map',
-  style: 'https://demotiles.maplibre.org/style.json',
+  style: BASE_MAP_STYLE,
   center: [0, 0],
   zoom: 2,
 });
@@ -54,6 +55,29 @@ map.on('load', () => {
   if (!style || !style.layers) {
     return;
   }
+
+  // Add Google Satellite basemap
+  map.addSource('google-satellite', {
+    type: 'raster',
+    tiles: ['https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'],
+    tileSize: 256,
+    attribution: '&copy; Google',
+  });
+
+  map.addLayer(
+    {
+      id: 'Satellite',
+      type: 'raster',
+      source: 'google-satellite',
+      minzoom: 14,
+      paint: {
+        'raster-opacity': 1,
+      },
+      layout: {
+        visibility: 'visible'
+      },
+    },
+  );
 
   // Create a simple test GeoJSON (world bounding boxes for a few countries)
   const geojson: GeoJSON.FeatureCollection = {
@@ -146,6 +170,8 @@ map.on('load', () => {
     }
   });
 
+
+
   // Add a raster layer (using MapLibre demo tiles as example)
   map.addSource('raster-source', {
     type: 'raster',
@@ -155,12 +181,15 @@ map.on('load', () => {
   });
 
   map.addLayer({
-    id: 'raster-layer',
+    id: 'OpenStreetMap',
     type: 'raster',
     source: 'raster-source',
     paint: {
-      'raster-opacity': 0.3
-    }
+      'raster-opacity': 1.0
+    },
+    layout: {
+      visibility: 'none'
+    },
   }, 'countries-layer'); // Insert below countries layer
 
   // Create the layer control with auto-detection
@@ -169,7 +198,8 @@ map.on('load', () => {
     // layers: ['countries-layer', 'countries-outline', 'country-points', 'raster-layer'],
     panelWidth: 350,
     panelMinWidth: 240,
-    panelMaxWidth: 450
+    panelMaxWidth: 450,
+    basemapStyleUrl: BASE_MAP_STYLE
   });
 
   // Add the control to the map
