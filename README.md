@@ -209,6 +209,7 @@ map.on("load", () => {
 - [@geoman-io/maplibre-geoman-free](https://www.npmjs.com/package/@geoman-io/maplibre-geoman-free) - Geometry drawing/editing
 - [maplibre-gl-geo-editor](https://www.npmjs.com/package/maplibre-gl-geo-editor) - Advanced geometry tools
 - [maplibre-gl-layer-control](https://www.npmjs.com/package/maplibre-gl-layer-control) - Layer visibility control
+- [maplibre-gl-components](https://www.npmjs.com/package/maplibre-gl-components) - Components for maplibre-gl
 
 ### Development Dependencies
 
