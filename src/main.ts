@@ -9,6 +9,7 @@ import maplibregl from 'maplibre-gl';
 import { Geoman } from '@geoman-io/maplibre-geoman-free';
 import { GeoEditor } from 'maplibre-gl-geo-editor';
 import { LayerControl } from 'maplibre-gl-layer-control';
+import {Legend} from 'maplibre-gl-components';
 
 const BASE_MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 const map = new maplibregl.Map({
@@ -204,4 +205,22 @@ map.on('load', () => {
 
   // Add the control to the map
   map.addControl(layerControl, 'top-right');
+
+  // Add a legend with different shape types
+  const shapeLegend = new Legend({
+    title: 'Layer Types',
+    items: [
+      { label: 'Points of Interest', color: '#e74c3c', shape: 'circle' },
+      { label: 'National Parks', color: '#2ecc71', shape: 'square' },
+      { label: 'Rivers', color: '#3498db', shape: 'line' },
+      { label: 'Roads', color: '#95a5a6', shape: 'line' },
+      { label: 'Cities', color: '#9b59b6', shape: 'circle' },
+    ],
+    collapsible: true,
+    collapsed: false,
+    width: 180,
+    position: 'bottom-left',
+  });
+  map.addControl(shapeLegend, 'bottom-left');
+
 });
