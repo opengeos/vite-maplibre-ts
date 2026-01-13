@@ -9,7 +9,7 @@ import maplibregl from 'maplibre-gl';
 import { Geoman } from '@geoman-io/maplibre-geoman-free';
 import { GeoEditor } from 'maplibre-gl-geo-editor';
 import { LayerControl } from 'maplibre-gl-layer-control';
-import {Legend} from 'maplibre-gl-components';
+import { Legend } from 'maplibre-gl-components';
 
 const BASE_MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 const map = new maplibregl.Map({
