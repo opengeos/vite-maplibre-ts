@@ -127,13 +127,49 @@ To use a custom domain:
 
 3. Configure DNS settings with your domain provider
 
+## Docker
+
+### Using Pre-built Image
+
+Pull and run the pre-built image from GitHub Container Registry:
+
+```bash
+docker run -p 8080:80 ghcr.io/opengeos/vite-maplibre-ts:latest
+```
+
+Then open http://localhost:8080/vite-maplibre-ts/ in your browser.
+
+### Building Locally
+
+Build the Docker image:
+
+```bash
+docker build -t vite-maplibre-ts .
+```
+
+Run the container:
+
+```bash
+docker run -p 8080:80 vite-maplibre-ts
+```
+
+### Docker Image Publishing
+
+The repository includes a GitHub Actions workflow (`.github/workflows/docker-publish.yml`) that automatically builds and publishes Docker images to GitHub Container Registry:
+
+- **On Release**: Images are built and pushed with version tags (e.g., `1.0.0`, `1.0`, `latest`)
+- **On Pull Request**: Images are built but not pushed (for testing)
+- **Manual Trigger**: Use the workflow dispatch to build manually
+
 ## Project Structure
 
 ```
 vite-maplibre-ts/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml      # GitHub Actions deployment workflow
+│       ├── deploy.yml          # GitHub Pages deployment workflow
+│       └── docker-publish.yml  # Docker image build and publish workflow
+├── Dockerfile              # Docker build configuration
 ├── public/
 │   └── vite.svg            # Static assets (copied as-is to dist)
 ├── src/
