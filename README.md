@@ -2,6 +2,9 @@
 
 A template repository for building interactive web maps using [Vite](https://vitejs.dev/), [TypeScript](https://www.typescriptlang.org/), and [MapLibre GL JS](https://maplibre.org/maplibre-gl-js/docs/). This template includes geometry editing tools and layer control, with automatic deployment to GitHub Pages.
 
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?logo=codesandbox)](https://codesandbox.io/p/github/opengeos/vite-maplibre-ts)
+[![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-blue?logo=stackblitz)](https://stackblitz.com/github/opengeos/vite-maplibre-ts)
+
 ## Live Demo
 
 [View the live demo](https://opengeos.github.io/vite-maplibre-ts/)
