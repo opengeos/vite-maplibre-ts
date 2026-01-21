@@ -7,7 +7,8 @@ import 'maplibre-gl-layer-control/style.css';
 
 import maplibregl from 'maplibre-gl';
 import { Geoman } from '@geoman-io/maplibre-geoman-free';
-import { GeoEditor } from 'maplibre-gl-geo-editor';
+import { GeoEditor, type GeoJsonLoadResult, type GeoJsonSaveResult, type AttributeChangeEvent, type DrawMode, type EditMode } from 'maplibre-gl-geo-editor';
+import type { Feature, GeoJsonProperties, Geometry } from 'geojson';
 import { LayerControl } from 'maplibre-gl-layer-control';
 import { Legend, SearchControl } from 'maplibre-gl-components';
 
@@ -134,28 +135,28 @@ map.on('load', () => {
       ],
       fileModes: ['open', 'save'],
       saveFilename: 'my-features.geojson',
-      onFeatureCreate: (feature) => {
+      onFeatureCreate: (feature: Feature<Geometry, GeoJsonProperties>) => {
         console.log('Feature created:', feature);
       },
-      onFeatureEdit: (feature, oldFeature) => {
+      onFeatureEdit: (feature: Feature<Geometry, GeoJsonProperties>, oldFeature: Feature<Geometry, GeoJsonProperties>) => {
         console.log('Feature edited:', feature, 'was:', oldFeature);
       },
-      onFeatureDelete: (featureId) => {
+      onFeatureDelete: (featureId: string | number) => {
         console.log('Feature deleted:', featureId);
       },
-      onSelectionChange: (features) => {
+      onSelectionChange: (features: Feature<Geometry, GeoJsonProperties>[]) => {
         console.log('Selection changed:', features.length, 'features');
       },
-      onModeChange: (mode) => {
+      onModeChange: (mode: DrawMode | EditMode | null) => {
         console.log('Mode changed:', mode);
       },
-      onGeoJsonLoad: (result) => {
+      onGeoJsonLoad: (result: GeoJsonLoadResult) => {
         console.log(`Loaded ${result.count} features from ${result.filename}`);
       },
-      onGeoJsonSave: (result) => {
+      onGeoJsonSave: (result: GeoJsonSaveResult) => {
         console.log(`Saved ${result.count} features to ${result.filename}`);
       },
-      onAttributeChange: (event) => {
+      onAttributeChange: (event: AttributeChangeEvent) => {
         console.log('Attribute changed:', {
           isNew: event.isNewFeature,
           previous: event.previousProperties,
