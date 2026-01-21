@@ -9,7 +9,7 @@ import maplibregl from 'maplibre-gl';
 import { Geoman } from '@geoman-io/maplibre-geoman-free';
 import { GeoEditor } from 'maplibre-gl-geo-editor';
 import { LayerControl } from 'maplibre-gl-layer-control';
-import { Legend } from 'maplibre-gl-components';
+import { Legend, SearchControl } from 'maplibre-gl-components';
 
 const BASE_MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 const map = new maplibregl.Map({
@@ -205,6 +205,21 @@ map.on('load', () => {
 
   // Add the control to the map
   map.addControl(layerControl, 'top-right');
+
+  // Add search control - allows searching for places
+  const searchControl = new SearchControl({
+    placeholder: 'Search for a place...',
+    flyToZoom: 14,
+    showMarker: true,
+    markerColor: '#e74c3c',
+    collapsed: true,
+  });
+  map.addControl(searchControl, 'top-right');
+
+  // Listen for search result selection
+  searchControl.on('resultselect', (event) => {
+    console.log('Selected place:', event.result?.name, 'at', event.result?.lng, event.result?.lat);
+  });
 
   // Add a legend with different shape types
   const shapeLegend = new Legend({
